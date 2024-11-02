@@ -105,6 +105,10 @@ abstract class WheelOfFortune extends Game {
         this.score += score;
     }
 
+    public void resetScore() {
+        this.score = 0;
+    }
+
     public int getScore() {
         return this.score;
     }
@@ -117,11 +121,19 @@ abstract class WheelOfFortune extends Game {
         return this.playerId;
     }
 
+    public void resetPreviousGuesses() {
+        this.previousGuesses = "";
+    }
+
+    public void clearPhraseIndexList() {
+        this.phraseIndexList.clear();
+    }
+
     @Override
     public boolean playNext() {
         if (phraseIndexList.isEmpty()) {
             return true;
-        } else if (phraseIndexList.size() > phraseList.size()) {
+        } else if (phraseIndexList.size() < phraseList.size()) {
             Scanner in = new Scanner(System.in);
             System.out.println("Do you want to play Wheel of Fortune? (y/n)");
             char response = in.nextLine().charAt(0);
@@ -145,13 +157,15 @@ abstract class WheelOfFortune extends Game {
         String winningPhrase = "Congrats you won!";
         String loosingPhrase = "Better luck next time!";
 
+        this.resetScore();
         this.setLives(5);
         this.setWin(false);
         this.setLose(false);
         this.randomPhrase();
         this.generateHiddenPhrase();
+        this.resetPreviousGuesses();
 
-        System.out.println("Welcome to Wheel of this!");
+        System.out.println("Welcome to Wheel of Fortune " + this.playerId + "!");
         System.out.printf("Guess the phrase... you can make %d mistakes!", this.lives);
         System.out.println();
 
