@@ -49,4 +49,17 @@ public class AllGamesRecord {
         }
         return highGameList;
     }
+
+    @Override
+    public String toString() {
+        String records = "";
+        records += "AllGameRecord {\n";
+
+        for (GameRecord record : gameRecords) {
+            records += record.toString() + "\n";
+        }
+
+        records += "}";
+        return records;
+    }
 }

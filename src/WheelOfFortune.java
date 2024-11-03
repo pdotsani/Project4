@@ -1,10 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 abstract class WheelOfFortune extends Game {
     private List<String> phraseList;
@@ -17,6 +14,22 @@ abstract class WheelOfFortune extends Game {
     private boolean lose;
     private int score = 0;
     private String playerId;
+
+    @Override
+    public String toString() {
+        return "Wheel Of Fortune[" + playerId +
+                ", hiddenPhrase" + hiddenPhrase +
+                ", score" + score +
+                ", lives" + lives + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WheelOfFortune that = (WheelOfFortune) o;
+        return lives == that.lives && win == that.win && lose == that.lose && score == that.score && Objects.equals(phraseList, that.phraseList) && Objects.equals(phrase, that.phrase) && Objects.equals(phraseIndexList, that.phraseIndexList) && Objects.equals(hiddenPhrase, that.hiddenPhrase) && Objects.equals(previousGuesses, that.previousGuesses) && Objects.equals(playerId, that.playerId);
+    }
 
     public void randomPhrase() {
         if (phraseList != null && phraseIndexList.size() == phraseList.size()) {

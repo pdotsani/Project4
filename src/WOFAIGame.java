@@ -42,13 +42,13 @@ public class WOFAIGame extends WheelOfFortune {
     }
 
     public static void main(String[] args) {
-//        WOFAIGame game = new WOFAIGame();
-//        AllGamesRecord record = game.playAll();
-//        System.out.println(record.average());
-//
-//        WOFAIGame game2 = new WOFAIGame(new PGAIPlayer("PGAI2"));
-//        AllGamesRecord record2 = game2.playAll();
-//        System.out.println(record2.average());
+        WOFAIGame game = new WOFAIGame();
+        AllGamesRecord record = game.playAll();
+        System.out.println(record.average());
+
+        WOFAIGame game2 = new WOFAIGame(new PGAIPlayer("PGAI2"));
+        AllGamesRecord record2 = game2.playAll();
+        System.out.println(record2.average());
 
         ArrayList<WOFPlayerInterface> playerArr = new ArrayList<>();
         playerArr.add(new PGAIPlayer("AIONE"));

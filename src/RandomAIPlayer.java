@@ -1,4 +1,6 @@
 public class RandomAIPlayer extends WOFPlayer {
+
+
     public RandomAIPlayer(String playerId) {
         super(playerId);
     }

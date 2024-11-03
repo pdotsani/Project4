@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WOFandMastermind.iml" filepath="$PROJECT_DIR$/WOFandMastermind.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WOFRefactor.iml" filepath="$PROJECT_DIR$/WOFRefactor.iml" />
     </modules>
   </component>
 </project>
