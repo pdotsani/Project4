@@ -1,6 +1,4 @@
 public class RandomAIPlayer extends WOFPlayer {
-
-
     public RandomAIPlayer(String playerId) {
         super(playerId);
     }
@@ -10,9 +8,7 @@ public class RandomAIPlayer extends WOFPlayer {
         super.setPreviousGuesses(previousGuesses);
         char guess;
         do {
-            boolean upperCase = Math.random() < 0.2;
-            int start = upperCase ? 65 : 97;
-            guess = (char)(start + (int)(Math.random() * 26));
+            guess = (char)(97 + (int)(Math.random() * 26));
         } while (super.getPreviousGuesses().indexOf(guess) != -1);
         return guess;
     }
