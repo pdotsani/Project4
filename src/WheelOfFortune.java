@@ -142,6 +142,14 @@ abstract class WheelOfFortune extends Game {
         this.phraseIndexList.clear();
     }
 
+    public List<String> getPhraseList() {
+        return this.phraseList;
+    }
+
+    public List<Integer> getPhraseIndexList() {
+        return this.phraseIndexList;
+    }
+
     @Override
     public boolean playNext() {
         if (phraseIndexList.isEmpty()) {

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class WOFAIGame extends WheelOfFortune {
     ArrayList<WOFPlayerInterface> players = new ArrayList<>();
@@ -29,11 +30,24 @@ public class WOFAIGame extends WheelOfFortune {
     }
 
     @Override
+    public boolean playNext() {
+        if (super.getPhraseIndexList().isEmpty()) {
+            return true;
+        } else if (super.getPhraseIndexList().size() < super.getPhraseList().size()) {
+            System.out.println("Do you want to play Wheel of Fortune? (y/n) y");
+            return true;
+        } else {
+            System.out.println("That's all the games we got today!");
+            return false;
+        }
+    }
+
+    @Override
     public AllGamesRecord playAll() {
         AllGamesRecord allGamesRecord = new AllGamesRecord();
         for(WOFPlayerInterface player : players){
             this.currentPlayer = player;
-            while(super.playNext()) {
+            while(this.playNext()) {
                 allGamesRecord.add(this.play());
             }
             super.clearPhraseIndexList();
