@@ -1,6 +1,9 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
+/**
+ * WOF game instance that uses AI players. Can take in a default AI,
+ * selected AI, or an array of AIs.
+ */
 public class WOFAIGame extends WheelOfFortune {
     ArrayList<WOFPlayerInterface> players = new ArrayList<>();
     WOFPlayerInterface currentPlayer;
@@ -17,6 +20,12 @@ public class WOFAIGame extends WheelOfFortune {
         this.players.addAll(players);
     }
 
+    /**
+     * Uses the given AI players guessing algorithm to submit the guess.
+     *
+     * @param previousGuesses
+     * @return char
+     */
     @Override
     public char getGuess(String previousGuesses) {
         return currentPlayer.nextGuess(previousGuesses);

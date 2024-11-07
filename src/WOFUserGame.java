@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * The game instance that allows a human player to play WOF.
+ */
 public class WOFUserGame extends WheelOfFortune {
     @Override
     public char getGuess(String previousGuesses) {

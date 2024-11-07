@@ -1,3 +1,7 @@
+/**
+ * Randomly selects a guess differentiating between upper case
+ * and lower case letters. Also weighed on common letters.
+ */
 public class CommonAIPlayer extends WOFPlayer {
     private final String COMMON = "ETAOINSHRD";
     private final String OTHER = "BCFGJKLMPQUVWXYZ";

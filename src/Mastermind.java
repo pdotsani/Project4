@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * The executable Mastermind game. Can be played by running playAll on a
+ * new instance in this class's main.
+ */
 public class Mastermind extends GuessingGame {
     final private char RED = 'R';
     final private char GREEN = 'G';
@@ -7,7 +11,6 @@ public class Mastermind extends GuessingGame {
     final private char YELLOW = 'Y';
     final private char ORANGE = 'O';
     final private char PURPLE = 'P';
-    private boolean active = true;
     private int score = 0;
     private String playerId;
 
@@ -38,6 +41,13 @@ public class Mastermind extends GuessingGame {
         super.setHiddenPhrase("****");
     }
 
+    /**
+     * Based on the guess, takes the 4 characters and matches exact matches (position and color)
+     * and partial (just color minus the exact matches)
+     *
+     * @param guess
+     * @return boolean: if there are partial or exact matches
+     */
     public boolean processGuess(String guess) {
         StringBuilder hiddenPhrase = new StringBuilder(super.getHiddenPhrase());
         int exact = 0;
@@ -68,6 +78,13 @@ public class Mastermind extends GuessingGame {
         return response == 'y';
     }
 
+    /**
+     * Code copied from spec. Finds the match of partials, and excludes the exact matches.
+     *
+     * @param secretSB
+     * @param guessSB
+     * @return int: number of partial matches/
+     */
     public int checkPartials(StringBuilder secretSB, StringBuilder guessSB) {
         int i = 0;
 
@@ -88,6 +105,11 @@ public class Mastermind extends GuessingGame {
         return partials;
     }
 
+    /**
+     * Gets the user's guess as a string
+     *
+     * @return String: user's guess
+     */
     public String getGuess() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();

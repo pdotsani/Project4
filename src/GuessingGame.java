@@ -1,5 +1,9 @@
 import java.util.Objects;
 
+/**
+ * A descendent of Game, the parent class to both guessing games in the repository.
+ * Common attributes consist of phrase, hiddenPhrase, and lives.
+ */
 abstract class GuessingGame extends Game {
     private String phrase;
     private String hiddenPhrase;
@@ -33,7 +37,13 @@ abstract class GuessingGame extends Game {
 
     public String getHiddenPhrase() { return this.hiddenPhrase; }
 
+    /**
+     * Generates the random phrase that will be set for the game.
+     */
     abstract void randomPhrase();
 
+    /**
+     * Generates the visible hidden phrase that is created from the ramdomPhase method.
+     */
     abstract void generateHiddenPhrase();
 }

@@ -1,3 +1,7 @@
+/**
+ * Chooses a guess based randomly on a letter in the alphabet, not
+ * differentiating between lower case and upper case.
+ */
 public class RandomAIPlayer extends WOFPlayer {
     public RandomAIPlayer(String playerId) {
         super(playerId);

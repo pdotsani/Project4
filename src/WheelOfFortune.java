@@ -28,6 +28,7 @@ abstract class WheelOfFortune extends GuessingGame {
         return super.getLives() == that.getLives() && win == that.win && lose == that.lose && score == that.score && Objects.equals(phraseList, that.phraseList) && Objects.equals(super.getPhrase(), that.getPhrase()) && Objects.equals(phraseIndexList, that.phraseIndexList) && Objects.equals(super.getHiddenPhrase(), that.getHiddenPhrase()) && Objects.equals(previousGuesses, that.previousGuesses) && Objects.equals(playerId, that.playerId);
     }
 
+    @Override
     public void randomPhrase() {
         if (phraseList != null && phraseIndexList.size() == phraseList.size()) {
             return;
@@ -49,6 +50,7 @@ abstract class WheelOfFortune extends GuessingGame {
         phraseIndexList.add(r);
     }
 
+    @Override
     public void generateHiddenPhrase() {
         // Created masked string for user "Game Board"
         String hiddenPhrase = "";
@@ -68,6 +70,13 @@ abstract class WheelOfFortune extends GuessingGame {
         super.setHiddenPhrase(hiddenPhrase);
     }
 
+    /**
+     * A reusable getGuess function. Human user will enter input. AI player will submit
+     * a guess based on AI logic.
+     *
+     * @param previousGuesses
+     * @return char: guess
+     */
     abstract char getGuess(String previousGuesses);
 
     public boolean processGuess(char guess) {

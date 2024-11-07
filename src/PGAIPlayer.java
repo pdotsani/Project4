@@ -1,3 +1,7 @@
+/**
+ * AI Player that only randomly selects a guess based on upper case
+ * and lower case letters.
+ */
 public class PGAIPlayer extends WOFPlayer {
     public PGAIPlayer(String playerId) {
         super(playerId);

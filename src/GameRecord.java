@@ -1,5 +1,10 @@
 import java.util.Objects;
 
+/**
+ * GameRecord contains the score and playerId for a single game session.
+ * Agregate metrics are calculated when accessing multiple GameRecords in
+ * an AllGamesRecord instance.
+ */
 public class GameRecord implements Comparable {
     private int score;
     private String playerId;

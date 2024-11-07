@@ -1,5 +1,8 @@
 import java.util.Objects;
 
+/**
+ * The parent class for WOFPlayer, which implements the WOFPlayerInterface
+ */
 abstract class WOFPlayer implements WOFPlayerInterface {
     private String playerId;
     private String previousGuesses = "";
