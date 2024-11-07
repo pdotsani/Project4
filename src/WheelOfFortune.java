@@ -3,13 +3,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-abstract class WheelOfFortune extends Game {
+abstract class WheelOfFortune extends GuessingGame {
     private List<String> phraseList;
-    private String phrase;
     private List<Integer> phraseIndexList = new ArrayList<>();
-    private String hiddenPhrase;
     private String previousGuesses = "";
-    private int lives;
     private boolean win;
     private boolean lose;
     private int score = 0;
@@ -18,9 +15,9 @@ abstract class WheelOfFortune extends Game {
     @Override
     public String toString() {
         return "Wheel Of Fortune[" + playerId +
-                ", hiddenPhrase" + hiddenPhrase +
+                ", hiddenPhrase" + super.getHiddenPhrase() +
                 ", score" + score +
-                ", lives" + lives + "]";
+                ", lives" + super.getLives() + "]";
     }
 
     @Override
@@ -28,7 +25,7 @@ abstract class WheelOfFortune extends Game {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WheelOfFortune that = (WheelOfFortune) o;
-        return lives == that.lives && win == that.win && lose == that.lose && score == that.score && Objects.equals(phraseList, that.phraseList) && Objects.equals(phrase, that.phrase) && Objects.equals(phraseIndexList, that.phraseIndexList) && Objects.equals(hiddenPhrase, that.hiddenPhrase) && Objects.equals(previousGuesses, that.previousGuesses) && Objects.equals(playerId, that.playerId);
+        return super.getLives() == that.getLives() && win == that.win && lose == that.lose && score == that.score && Objects.equals(phraseList, that.phraseList) && Objects.equals(super.getPhrase(), that.getPhrase()) && Objects.equals(phraseIndexList, that.phraseIndexList) && Objects.equals(super.getHiddenPhrase(), that.getHiddenPhrase()) && Objects.equals(previousGuesses, that.previousGuesses) && Objects.equals(playerId, that.playerId);
     }
 
     public void randomPhrase() {
@@ -48,7 +45,7 @@ abstract class WheelOfFortune extends Game {
         while (phraseIndexList.contains(r)) {
             r = rand.nextInt(phraseList.size());
         }
-        this.phrase = phraseList.get(r);
+        super.setPhrase(phraseList.get(r));
         phraseIndexList.add(r);
     }
 
@@ -56,7 +53,7 @@ abstract class WheelOfFortune extends Game {
         // Created masked string for user "Game Board"
         String hiddenPhrase = "";
 
-        for (char c : this.phrase.toCharArray()) {
+        for (char c : super.getPhrase().toCharArray()) {
             if (c != ' ') {
                 if (Character.isLetter(c)) {
                     hiddenPhrase += '*';
@@ -68,20 +65,20 @@ abstract class WheelOfFortune extends Game {
             }
         }
 
-        this.hiddenPhrase = hiddenPhrase;
+        super.setHiddenPhrase(hiddenPhrase);
     }
 
     abstract char getGuess(String previousGuesses);
 
     public boolean processGuess(char guess) {
-        StringBuilder sb = new StringBuilder(this.hiddenPhrase);
+        StringBuilder sb = new StringBuilder(super.getHiddenPhrase());
 
-        if (this.phrase.indexOf(guess) == -1) {
+        if (super.getPhrase().indexOf(guess) == -1) {
             return false;
         }
 
-        for (int i = 0; i < this.phrase.length(); i++) {
-            char c = this.phrase.charAt(i);
+        for (int i = 0; i < super.getPhrase().length(); i++) {
+            char c = super.getPhrase().charAt(i);
             if (!Character.isLetter(c) && c == ' ') {
                 sb.setCharAt(i, ' ');
             } else if (!Character.isLetter(c) && c != ' ') {
@@ -94,16 +91,12 @@ abstract class WheelOfFortune extends Game {
         }
 
         // return updated hiddenString and returns match true
-        this.hiddenPhrase = sb.toString();
+        super.setHiddenPhrase(sb.toString());
         return true;
     }
 
     public boolean didUserWin() {
-        return this.phrase.compareTo(this.hiddenPhrase) == 0;
-    }
-
-    public void setLives(int lives) {
-        this.lives = lives;
+        return super.getPhrase().compareTo(super.getHiddenPhrase()) == 0;
     }
 
     public void setWin(boolean win) {
@@ -187,12 +180,12 @@ abstract class WheelOfFortune extends Game {
         this.resetPreviousGuesses();
 
         System.out.println("Welcome to Wheel of Fortune " + this.playerId + "!");
-        System.out.printf("Guess the phrase... you can make %d mistakes!", this.lives);
+        System.out.printf("Guess the phrase... you can make %d mistakes!", super.getLives());
         System.out.println();
 
         while (!this.win && !this.lose) {
             System.out.println();
-            System.out.println(this.hiddenPhrase);
+            System.out.println(super.getHiddenPhrase());
             System.out.println("You have guessed these letters: " + this.previousGuesses);
             System.out.print("Choose a letter: ");
             char guess = this.getGuess(this.previousGuesses);
@@ -206,9 +199,10 @@ abstract class WheelOfFortune extends Game {
 
                     if (!correct) {
                         System.out.println("The letter " + guess + " is not in the phrase!");
-                        this.lives--;
+                        int newLives = super.getLives() - 1;
+                        super.setLives(newLives);
 
-                        if (this.lives == 0) {
+                        if (super.getLives() == 0) {
                             this.setLose(true);
                         }
                     } else {
@@ -223,13 +217,13 @@ abstract class WheelOfFortune extends Game {
                 System.out.println("You did not enter a letter!");
             }
 
-            System.out.println("You have " + this.lives + " " + (this.lives != 1 ? "chances" : "chance") + " left!");
+            System.out.println("You have " + super.getLives() + " " + (super.getLives() != 1 ? "chances" : "chance") + " left!");
         }
 
         String gameOverPhrase = this.win ? winningPhrase : loosingPhrase;
         System.out.println(gameOverPhrase);
         if (this.didUserWin()) {
-            System.out.println(this.hiddenPhrase);
+            System.out.println(super.getHiddenPhrase());
         }
     }
 }
